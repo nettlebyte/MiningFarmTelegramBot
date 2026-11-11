@@ -1,101 +1,89 @@
-# MiningFarmTelegramBot
+# Mining Farm Telegram Bot
 
-Telegram-бот (aiogram 3) с мини-игрой “майнинг-ферма” для **групповых чатов**: покупка и установка оборудования, добыча BTC, кошелёк/банк, переводы между игроками, кланы и рейтинги.
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![aiogram](https://img.shields.io/badge/aiogram-3.13.1-2CA5E0?logo=telegram&logoColor=white)](https://docs.aiogram.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## Ключевые особенности
-- **Работа в группах**  
-  Бот рассчитан на использование в **group/supergroup** (в личке выдаёт подсказку и кнопку приглашения в чат).
-- **Подписка на новостной канал**  
-  Для выполнения команд (бот-команд) может требоваться подписка на канал новостей: `@rSynapse`.
-- **Майнинг-ферма**
-  - Панель фермы: включение/выключение майнинга, обновление статуса
-  - Накопление “добытого” BTC и **сбор** в кошелёк
-- **Магазин / инвентарь / оборудование**
-  - Магазин категорий (оборудование, компоненты и т.д.)
-  - Инвентарь и установка предметов на ферму
-- **Кошелёк и банк**
-  - Балансы USD и BTC “на руках” + “в банке”
-  - Обмен BTC→USD по текущему курсу
-  - Встроенный адрес кошелька игрока для переводов между игроками
-- **Переводы между игроками**
-  - Команда `/send` для отправки USD/BTC по адресу игрока
-  - Ограничение для новых аккаунтов: переводы доступны через 24 часа после создания фермы
-- **Кланы**
-  - Создание клана, приглашения, участники
-  - Казна клана (пополнение всеми, вывод лидером)
-  - Клановые бонусы (покупка лидером)
-- **Рейтинги и профиль**
-  - Таблица лидеров, профиль игрока, справка/информация
-- **Дополнительно**
-  - “Донос” на игрока (репорт) из чата (reply на сообщение)
-  - Фоновое обновление курса BTC (примерно раз в час)
-  - Опциональный “Синапс” (поиск трека и отправка превью/аудио через внешние сервисы)
+A Telegram group bot featuring a virtual mining farm simulator. Build your own mining operation, upgrade equipment, earn in-game currency, compete with other players, and join clans.
 
-## Технологии
-- Python
-- aiogram `3.13.1`
-- SQLite (файл базы: `mining_farm.db`)
-- `python-dotenv` для `.env`
-- `requests` (для внешних запросов)
+## Features
 
-## Установка
-1. Установи зависимости:
+- **Mining System** — Build, manage, and upgrade your virtual mining farm.
+- **Equipment Shop** — Purchase hardware and manage your inventory.
+- **Wallet & Bank** — Manage virtual USD and BTC balances.
+- **Player Transfers** — Send in-game currency to other players.
+- **Clans** — Create clans, invite members, and manage a shared treasury.
+- **Leaderboards** — Compete with other players and track rankings.
+- **Player Profiles** — View player statistics and progress.
+- **Admin Panel** — Manage players, the in-game economy, and bot operations.
+- **Database Backups** — Optional automatic SQLite backups.
+
+## Requirements
+
+- Python 3
+- Telegram Bot Token
+
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/nettlebyte/MiningFarmTelegramBot.git
+   cd MiningFarmTelegramBot
+   ```
+
+2. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
-2. Создай файл `.env` в корне проекта и укажи токен бота:
+
+3. Create a `.env` file in the project directory:
+
    ```env
-   BOT_TOKEN=123456:ABCDEF_your_token_here
+   BOT_TOKEN=your_bot_token
    ADMIN_ID=0
    DB_BACKUP_CHAT_ID=0
    SOUNDCLOUD_CLIENT_ID=
    JAMENDO_CLIENT_ID=
    ```
 
-## Настройка переменных окружения (.env)
-- `BOT_TOKEN` — **обязательно**, токен Telegram-бота.
-- `ADMIN_ID` — ID администратора (целое число). Если `0`, админ-функции отключены.
-- `DB_BACKUP_CHAT_ID` — chat_id, куда бот будет отправлять бэкапы SQLite (если `0` — бэкапы отключены).
-- `SOUNDCLOUD_CLIENT_ID` — опционально, для поиска треков SoundCloud (модуль “Синапс”).
-- `JAMENDO_CLIENT_ID` — опционально, для поиска треков Jamendo (модуль “Синапс”).
+4. Start the bot:
 
-## Запуск
-```bash
-python main.py
-```
+   ```bash
+   python main.py
+   ```
 
-После запуска:
-- добавь бота в **группу/супергруппу**
-- начни с `/start` или сразу `/mining`
+## Main Commands
 
-## Команды (основные)
-- `/mining` — панель фермы (вкл/выкл, обновить)
-- `/shop` — магазин оборудования
-- `/inv` или `/inventory` — инвентарь
-- `/wallet` — кошелёк и банк
-- `/info` — подробная информация о ферме
-- `/wiki` — энциклопедия оборудования
-- `/leaders` — топ игроков
-- `/profile` — профиль игрока
-- `/clan` — информация о клане
-- `/clan_create <название>` — создать клан
-- `/clan_invite` — пригласить в клан (ответом на сообщение игрока)
-- `/send <валюта> <адрес> <сумма>` — перевод USD/BTC
+| Command | Description |
+|---|---|
+| `/start` | Start the bot |
+| `/mining` | Open the mining farm |
+| `/shop` | Open the equipment shop |
+| `/inventory` | View inventory |
+| `/wallet` | Open wallet |
+| `/profile` | View player profile |
+| `/leaders` | View leaderboard |
+| `/clan` | View clan information |
+| `/wiki` | Browse the equipment encyclopedia |
+| `/help` | Show available commands |
 
-Полный список команд бот также показывает в `/help`.
+## Technologies
 
-## Админ-команды
-Админ-команды доступны только пользователю с `user_id == ADMIN_ID`. В проекте есть набор команд для:
-- выдачи/изъятия валюты
-- модерации (бан/разбан)
-- статистики, техработ/рестарта
-- управления кошельками
-- служебных проверок
+- Python
+- aiogram 3
+- SQLite
+- Requests
+- python-dotenv
 
-## Бэкапы базы данных (опционально)
-Если `DB_BACKUP_CHAT_ID` задан, бот будет периодически отправлять **бэкап SQLite** в указанный чат (документом), вместе с краткой статистикой (пользователи/кланы/размер файла).
+## Notes
 
-## Примечания
-- База создаётся автоматически при первом запуске (`mining_farm.db`).
-- Бот ориентирован на работу в чатах: часть UI сделана через inline-кнопки и обновление сообщений.
-- Если включена проверка подписки, пользователи без подписки на `@rSynapse` не смогут пользоваться командами до подтверждения.
+- Designed for Telegram groups and supergroups.
+- Some commands require a subscription to the news channel.
+- The database is created automatically on first launch.
+- BTC and USD are virtual in-game currencies, not real cryptocurrency transactions.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
